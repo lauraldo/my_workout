@@ -17,7 +17,7 @@ class WorkoutDataTest {
         prettyPrint = true
     }
 
-    fun readJsonFromFile(filePath: String): String {
+    private fun readJsonFromFile(filePath: String): String {
         val file = File(filePath)
         return file.readText()
     }
