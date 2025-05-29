@@ -11,7 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.niolasdev.myworkout.ui.WorkoutScreen
 import com.niolasdev.myworkout.ui.WorkoutViewModel
-import com.niolasdev.myworkout.ui.theme.MyWorkoutTheme
+import com.niolasdev.myworkout.ui.theme.DefaultTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -20,7 +20,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            MyWorkoutTheme {
+            DefaultTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     WorkoutScreen(
                         viewModel = hiltViewModel<WorkoutViewModel>(),

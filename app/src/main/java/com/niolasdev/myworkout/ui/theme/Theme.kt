@@ -1,58 +1,58 @@
 package com.niolasdev.myworkout.ui.theme
 
-import android.app.Activity
-import android.os.Build
-import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.darkColorScheme
-import androidx.compose.material3.dynamicDarkColorScheme
-import androidx.compose.material3.dynamicLightColorScheme
-import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.platform.LocalContext
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.staticCompositionLocalOf
+import androidx.compose.ui.graphics.Color
 
-private val DarkColorScheme = darkColorScheme(
-    primary = Purple80,
-    secondary = PurpleGrey80,
-    tertiary = Pink80
+data class ColorScheme(
+    val primary: Color,
+    val secondary: Color,
+    val tertiary: Color,
+    val accent: Color,
+    val themeMain: Color,
+//    val unselected: Color,
+    val textPrimary: Color,
+    val textSecondary: Color,
+    val textTertiary: Color,
 )
 
-private val LightColorScheme = lightColorScheme(
-    primary = Purple40,
-    secondary = PurpleGrey40,
-    tertiary = Pink40
+val localColorScheme = staticCompositionLocalOf {
+    ColorScheme(
+        primary = Color.Unspecified,
+        secondary = Color.Unspecified,
+        tertiary = Color.Unspecified,
+        accent = Color.Unspecified,
+        themeMain = Color.Unspecified,
+//        unselected = Color.Unspecified,
+        textPrimary = Color.Unspecified,
+        textSecondary = Color.Unspecified,
+        textTertiary = Color.Unspecified,
+    )
+}
 
-    /* Other default colors to override
-    background = Color(0xFFFFFBFE),
-    surface = Color(0xFFFFFBFE),
-    onPrimary = Color.White,
-    onSecondary = Color.White,
-    onTertiary = Color.White,
-    onBackground = Color(0xFF1C1B1F),
-    onSurface = Color(0xFF1C1B1F),
-    */
-)
+object Theme {
+    val colors: ColorScheme
+        @Composable get() = localColorScheme.current
+}
 
 @Composable
-fun MyWorkoutTheme(
-    darkTheme: Boolean = isSystemInDarkTheme(),
-    // Dynamic color is available on Android 12+
-    dynamicColor: Boolean = true,
+fun DefaultTheme(
     content: @Composable () -> Unit
 ) {
-    val colorScheme = when {
-        dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
-            val context = LocalContext.current
-            if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
-        }
+    val colors = ColorScheme(
+        primary = Color(0xFF252F3B),
+        secondary = Color(0xFF191F27),
+        tertiary = Color(0xFF384555),
+        accent = Color(0xFF44A8F2),
+        themeMain = Color(0xFFFFDB13),
+        textPrimary = Color(0xFFFFFFFF),
+        textSecondary = Color(0xFFD3D3D3),
+        textTertiary = Color(0xFF000000),
+    )
 
-        darkTheme -> DarkColorScheme
-        else -> LightColorScheme
-    }
-
-    MaterialTheme(
-        colorScheme = colorScheme,
-        typography = Typography,
-        content = content
+    CompositionLocalProvider(
+        localColorScheme provides colors,
+        content = content,
     )
 }
