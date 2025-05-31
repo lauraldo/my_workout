@@ -27,7 +27,7 @@ fun WorkoutScreen(
 
 @Composable
 internal fun WorkoutScreen(
-    uiState: WorkoutUiState = WorkoutUiState.Loading,
+    uiState: WorkoutUiState,
     modifier: Modifier,
 ) {
 
