@@ -1,7 +1,7 @@
 package com.niolasdev.myworkout.ui
 
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
@@ -45,7 +45,9 @@ fun BottomNavBar(
                 },
                 icon = {
                     Icon(
-                        modifier = Modifier.size(32.dp),
+                        modifier = Modifier
+                            .padding(top = 4.dp)
+                            .size(32.dp),
                         painter = painterResource(id = screen.icon),
                         contentDescription = null,
                     )
