@@ -1,18 +1,26 @@
 package com.niolasdev.myworkout.ui
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.FilledIconButton
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -30,6 +38,8 @@ import com.niolasdev.myworkout.R
 import com.niolasdev.myworkout.ui.theme.DefaultTheme
 import com.niolasdev.myworkout.ui.theme.Theme
 import com.niolasdev.myworkout.ui.widget.ControlSwitch
+import com.niolasdev.myworkout.ui.widget.ExerciseHeaderItem
+import com.niolasdev.myworkout.ui.widget.ExerciseItem
 import com.niolasdev.myworkout.ui.widget.FilterButton
 
 @Composable
@@ -105,14 +115,14 @@ internal fun WorkoutScreen(
                     contentPadding = PaddingValues(4.dp),
                     horizontalArrangement = Arrangement.spacedBy(4.dp)
                 ) {
-                    itemsIndexed (uiState.data.workoutData.workouts) { index, workoutDay ->
+                    itemsIndexed(uiState.data.workoutData.workouts) { index, workoutDay ->
                         ControlSwitch(
                             selected = index == selectedDay.intValue,
                             onSelect = {
                                 selectedDay.intValue = index
                             },
                         ) {
-                            if (workoutDay.day == 2) {
+                            if (workoutDay.isCompleted) {
                                 Icon(
                                     modifier = Modifier.size(16.dp),
                                     painter = painterResource(R.drawable.ic_check),
@@ -126,6 +136,69 @@ internal fun WorkoutScreen(
                                 )
                             }
                         }
+                    }
+                }
+
+                Spacer(Modifier.height(16.dp))
+
+                with(uiState.data) {
+                    Box(
+                        modifier = Modifier.fillMaxWidth(),
+                    ) {
+                        Column(
+                            modifier = Modifier.align(Alignment.Center),
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                        ) {
+                            Text(
+                                text = "Week ${workoutData.currentWeek}/${workoutData.weekCount} " +
+                                        "- ${workoutData.currentWeekName}",
+                                color = Theme.colors.accent
+                            )
+                            Text(
+                                text = if (workoutData.workouts[selectedDay.intValue].isCompleted)
+                                    "WORKOUT COMPLETED" else "UPCOMING WORKOUT",
+                                color = Theme.colors.textPrimary,
+                                style = Theme.fonts.important,
+                            )
+                            Text(
+                                text = workoutData.workouts[selectedDay.intValue].nextExerciseName,
+                                color = Theme.colors.textSecondary,
+                            )
+                        }
+                        FilledIconButton(
+                            modifier = Modifier.align(Alignment.CenterEnd),
+                            onClick = {},
+                            colors = IconButtonDefaults.iconButtonColors(
+                                containerColor = Theme.colors.secondary,
+                            ),
+                            shape = RoundedCornerShape(8.dp),
+                        ) {
+                            Icon(
+                                modifier = Modifier.size(16.dp),
+                                painter = painterResource(R.drawable.ic_pen),
+                                tint = Theme.colors.textPrimary,
+                                contentDescription = null,
+                            )
+                        }
+                    }
+                }
+
+                Spacer(Modifier.height(16.dp))
+
+                LazyColumn(
+                    modifier = Modifier
+                        .padding(horizontal = 8.dp)
+                        .background(color = Theme.colors.secondary, shape = RoundedCornerShape(8.dp)),
+                    contentPadding = PaddingValues(all = 8.dp),
+                    verticalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+
+                    item {
+                        ExerciseHeaderItem(uiState.data.workoutData.workouts[selectedDay.intValue])
+                    }
+
+                    items(uiState.data.workoutData.workouts[selectedDay.intValue].workout) { exercise ->
+                        ExerciseItem(exercise)
                     }
                 }
             }
