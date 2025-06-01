@@ -50,7 +50,12 @@ fun ExerciseItem(
             )
             Spacer(modifier = Modifier.height(6.dp))
             Text(
-                text = "${exercise.setsAmount} sets x ${exercise.repRange} reps",
+                text = StringBuilder("${exercise.setsAmount} sets x ${exercise.repRange} reps")
+                    .apply {
+                        if (exercise.weightLbs > 0) {
+                            append(" x ${exercise.weightLbs} lb")
+                        }
+                    }.toString(),
                 color = Theme.colors.textSecondary,
             )
         }

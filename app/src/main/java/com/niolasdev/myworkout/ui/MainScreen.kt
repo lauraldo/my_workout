@@ -1,11 +1,14 @@
 package com.niolasdev.myworkout.ui
 
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.rememberNavController
 
@@ -34,17 +37,20 @@ internal fun MainScreen(
     Scaffold(
         containerColor = Color.Transparent,
         modifier = modifier,
-        content = @Composable { innerPadding ->
-            MainNavigation(
-                navController = navController,
-                modifier = modifier.padding(innerPadding)
-            )
-        },
         bottomBar = {
             BottomNavBar(
                 selectedScreen = selectedScreen,
                 onSelectScreen = onSelectScreen,
                 navController = navController,
+            )
+        },
+//        contentWindowInsets = WindowInsets(0.dp),
+        content = @Composable { innerPadding ->
+//            Modifier.padding(innerPadding)
+            println("Inner padding: $innerPadding")
+            MainNavigation(
+                navController = navController,
+                modifier = modifier.padding(innerPadding)
             )
         },
     )

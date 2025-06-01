@@ -22,6 +22,86 @@
           "amount_of_sets": 5,
           "rep_range": "10-12",
           "weight_amount": null
+        },
+        {
+          "exercise_id": 7,
+          "exercise_name": "Smith Machine Squat",
+          "exercise_thumbnail": "exc_t_168_ronald.jpg",
+          "muscle_group": "Legs",
+          "muscle_group_image": "Muscle Groups 4.png",
+          "amount_of_sets": 4,
+          "rep_range": "6-8",
+          "weight_amount": "9.0"
+        },
+        {
+          "exercise_id": 6,
+          "exercise_name": "Selector Overhead Press Machine, Narrow",
+          "exercise_thumbnail": "exc_t_167_ronald.jpg",
+          "muscle_group": "Legs",
+          "muscle_group_image": "Muscle Groups 5.png",
+          "amount_of_sets": 3,
+          "rep_range": "10-12",
+          "weight_amount": "10.0"
+        },
+        {
+          "exercise_id": 5,
+          "exercise_name": "Plate Loaded Incline Chest Press Machine",
+          "exercise_thumbnail": "exc_t_166_ronald.jpg",
+          "muscle_group": "Legs",
+          "muscle_group_image": "Muscle Groups 2.png",
+          "amount_of_sets": 4,
+          "rep_range": "10-12",
+          "weight_amount": "11.0"
+        },
+        {
+          "exercise_id": 4,
+          "exercise_name": "Hack Squat Wide Stance",
+          "exercise_thumbnail": "exc_t_163_ronald.jpg",
+          "muscle_group": "Legs",
+          "muscle_group_image": "Muscle Groups 1.png",
+          "amount_of_sets": 3,
+          "rep_range": "8-10",
+          "weight_amount": "12.0"
+        },
+        {
+          "exercise_id": 7,
+          "exercise_name": "Seated Dumbbell Lateral Raise",
+          "exercise_thumbnail": "exc_t_162_ronald.jpg",
+          "muscle_group": "Legs",
+          "muscle_group_image": "Muscle Groups 3.png",
+          "amount_of_sets": 4,
+          "rep_range": "10-12",
+          "weight_amount": "13.0"
+        },
+        {
+          "exercise_id": 6,
+          "exercise_name": "Standing Cable Tricep Pushdown, Single Arm",
+          "exercise_thumbnail": "exc_t_161_ronald.jpg",
+          "muscle_group": "Legs",
+          "muscle_group_image": "Muscle Groups 4.png",
+          "amount_of_sets": 3,
+          "rep_range": "8-10",
+          "weight_amount": "14.0"
+        },
+        {
+          "exercise_id": 5,
+          "exercise_name": "Shoulder Press",
+          "exercise_thumbnail": "exc_t_150_ronald.jpg",
+          "muscle_group": "Legs",
+          "muscle_group_image": "Muscle Groups 5.png",
+          "amount_of_sets": 4,
+          "rep_range": "10-12",
+          "weight_amount": "15.0"
+        },
+        {
+          "exercise_id": 4,
+          "exercise_name": "Roman Squat",
+          "exercise_thumbnail": "exc_t_151_ronald.jpg",
+          "muscle_group": "Legs",
+          "muscle_group_image": "Muscle Groups 2.png",
+          "amount_of_sets": 3,
+          "rep_range": "4-5",
+          "weight_amount": "16.0"
         }
       ]
     },

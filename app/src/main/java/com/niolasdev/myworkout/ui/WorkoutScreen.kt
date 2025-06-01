@@ -1,5 +1,6 @@
 package com.niolasdev.myworkout.ui
 
+import androidx.compose.foundation.OverscrollEffect
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -29,6 +30,7 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -44,7 +46,6 @@ import com.niolasdev.myworkout.ui.widget.FilterButton
 
 @Composable
 fun WorkoutScreen(
-    modifier: Modifier = Modifier,
     viewModel: WorkoutViewModel = hiltViewModel<WorkoutViewModel>(),
 ) {
     val state by viewModel.uiState.collectAsStateWithLifecycle()
@@ -55,7 +56,6 @@ fun WorkoutScreen(
 
     WorkoutScreen(
         uiState = state,
-        modifier = modifier,
     )
 
 }
@@ -63,10 +63,9 @@ fun WorkoutScreen(
 @Composable
 internal fun WorkoutScreen(
     uiState: WorkoutUiState,
-    modifier: Modifier = Modifier,
 ) {
     Column(
-        modifier = modifier.fillMaxSize(),
+        modifier = Modifier.fillMaxSize(),
     ) {
 
         Text(
@@ -185,20 +184,27 @@ internal fun WorkoutScreen(
 
                 Spacer(Modifier.height(16.dp))
 
-                LazyColumn(
+                Box(
                     modifier = Modifier
+                        .fillMaxSize()
                         .padding(horizontal = 8.dp)
-                        .background(color = Theme.colors.secondary, shape = RoundedCornerShape(8.dp)),
-                    contentPadding = PaddingValues(all = 8.dp),
-                    verticalArrangement = Arrangement.spacedBy(8.dp)
+                        .background(
+                            color = Theme.colors.secondary,
+                            shape = RoundedCornerShape(8.dp)
+                        ),
                 ) {
+                    LazyColumn(
+                        contentPadding = PaddingValues(all = 8.dp),
+                        verticalArrangement = Arrangement.spacedBy(8.dp)
+                    ) {
 
-                    item {
-                        ExerciseHeaderItem(uiState.data.workoutData.workouts[selectedDay.intValue])
-                    }
+                        item {
+                            ExerciseHeaderItem(uiState.data.workoutData.workouts[selectedDay.intValue])
+                        }
 
-                    items(uiState.data.workoutData.workouts[selectedDay.intValue].workout) { exercise ->
-                        ExerciseItem(exercise)
+                        items(uiState.data.workoutData.workouts[selectedDay.intValue].workout) { exercise ->
+                            ExerciseItem(exercise)
+                        }
                     }
                 }
             }

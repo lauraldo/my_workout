@@ -17,16 +17,16 @@ fun MainNavigation(
         startDestination = UiBottomBarItem.Home,
     ) {
         composable<UiBottomBarItem.Home> {
-            WorkoutScreen(modifier = modifier)
+            WorkoutScreen()
         }
         composable<UiBottomBarItem.Exercises> {
-            EmptyScreen(modifier = modifier)
+            EmptyScreen()
         }
         composable<UiBottomBarItem.Progress> {
-            EmptyScreen(modifier = modifier)
+            EmptyScreen()
         }
         composable<UiBottomBarItem.Settings> {
-            EmptyScreen(modifier = modifier)
+            EmptyScreen()
         }
     }
 }
