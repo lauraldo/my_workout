@@ -20,7 +20,7 @@ sealed class UiBottomBarItem(
     @Serializable
     data object Exercises : UiBottomBarItem(
         title = R.string.exercises,
-        icon = R.drawable.ic_lift,
+        icon = R.drawable.ic_press,
     )
 
     @Serializable
@@ -32,6 +32,6 @@ sealed class UiBottomBarItem(
     @Serializable
     data object Settings : UiBottomBarItem(
         title = R.string.settings,
-        icon = R.drawable.ic_settings
+        icon = R.drawable.ic_gear_small
     )
 }

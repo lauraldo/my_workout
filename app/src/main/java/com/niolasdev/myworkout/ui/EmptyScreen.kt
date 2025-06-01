@@ -7,6 +7,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.sp
 import com.niolasdev.myworkout.ui.theme.Theme
 
 @Composable
@@ -18,6 +19,6 @@ fun EmptyScreen(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(text = "Coming Soon", color = Theme.colors.textPrimary)
+        Text(text = "Coming Soon", color = Theme.colors.textPrimary, fontSize = 20.sp)
     }
 }

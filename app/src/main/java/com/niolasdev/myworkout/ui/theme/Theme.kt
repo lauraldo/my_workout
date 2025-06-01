@@ -95,7 +95,7 @@ fun DefaultTheme(
     )
 
     val typography = Typography(
-        title = TextStyle(fontSize = 18.sp),
+        title = TextStyle(fontSize = 20.sp),
         important = TextStyle(
             fontFamily = workoutFontFamily,
             fontSize = 16.sp
