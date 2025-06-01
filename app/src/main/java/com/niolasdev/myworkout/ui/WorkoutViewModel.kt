@@ -12,7 +12,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -58,6 +57,6 @@ data class WorkoutUiData(
 
 sealed interface WorkoutUiState {
     object Loading : WorkoutUiState
-    data class Ready(val workoutData: WorkoutUiData) : WorkoutUiState
+    data class Ready(val data: WorkoutUiData) : WorkoutUiState
     class Error(val message: String) : WorkoutUiState
 }
