@@ -3,6 +3,7 @@ package com.niolasdev.myworkout.ui
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.niolasdev.myworkout.data.Filter
 import com.niolasdev.myworkout.data.WorkoutData
 import com.niolasdev.myworkout.domain.WorkoutRepository
 import com.niolasdev.myworkout.domain.WorkoutResult
@@ -11,13 +12,14 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class WorkoutViewModel @Inject constructor(
     private val workoutRepository: WorkoutRepository,
-): ViewModel() {
+) : ViewModel() {
 
     private val LOG_TAG = this::class.simpleName ?: "VM"
 
@@ -28,23 +30,34 @@ class WorkoutViewModel @Inject constructor(
 
     fun getWorkoutData() {
         viewModelScope.launch(Dispatchers.IO) {
-            val result = workoutRepository.getWorkoutData()
-            _state.value = when (result) {
+            val workoutData = workoutRepository.getWorkoutData()
+            _state.value = when (workoutData) {
                 is WorkoutResult.Error -> {
-                    Log.d(LOG_TAG, result.e?.message ?: "error")
-                    WorkoutUiState.Error(result.e?.message ?: "")
+                    Log.d(LOG_TAG, workoutData.e?.message ?: "error")
+                    WorkoutUiState.Error(workoutData.e?.message ?: "")
                 }
+
                 is WorkoutResult.Success -> {
-                    Log.d(LOG_TAG, result.data.workouts[0].workout[0].exerciseName)
-                    WorkoutUiState.Data(result.data)
+                    Log.d(LOG_TAG, workoutData.data.workouts[0].workout[0].exerciseName)
+                    WorkoutUiState.Ready(
+                        WorkoutUiData(
+                            workoutData = workoutData.data,
+                            filters = workoutRepository.getFilters()
+                        )
+                    )
                 }
             }
         }
     }
 }
 
+data class WorkoutUiData(
+    val workoutData: WorkoutData,
+    val filters: List<Filter>
+)
+
 sealed interface WorkoutUiState {
-    object Loading: WorkoutUiState
-    data class Data(val workoutData: WorkoutData): WorkoutUiState
-    class Error(val message: String): WorkoutUiState
+    object Loading : WorkoutUiState
+    data class Ready(val workoutData: WorkoutUiData) : WorkoutUiState
+    class Error(val message: String) : WorkoutUiState
 }

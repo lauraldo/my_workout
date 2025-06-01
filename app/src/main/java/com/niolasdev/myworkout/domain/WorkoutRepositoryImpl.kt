@@ -1,6 +1,7 @@
 package com.niolasdev.myworkout.domain
 
 import android.content.Context
+import com.niolasdev.myworkout.data.Filter
 import com.niolasdev.myworkout.data.WorkoutData
 import kotlinx.serialization.json.Json
 import javax.inject.Inject
@@ -24,5 +25,17 @@ class WorkoutRepositoryImpl @Inject constructor(
         } catch (e: Throwable) {
             WorkoutResult.Error(e)
         }
+    }
+
+    override suspend fun getFilters(): List<Filter> {
+        return listOf(
+            Filter("Muscles (16)", false),
+            Filter("45-60 Min", false),
+            Filter("Schedule", false),
+            Filter("Basic Exercises", false),
+            Filter("Equipment (64)", false),
+            Filter("Goals (1)", false),
+            Filter("Refresh Plan", true),
+        )
     }
 }
