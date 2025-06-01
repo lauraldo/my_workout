@@ -103,8 +103,8 @@ fun DefaultTheme(
     )
 
     val elevation = Elevation(
-        default = 0.dp,
-        pressed = 2.dp,
+        default = 2.dp,
+        pressed = 0.dp,
     )
 
     CompositionLocalProvider(
